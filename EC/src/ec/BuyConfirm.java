@@ -34,12 +34,23 @@ public class BuyConfirm extends HttpServlet {
 			//買い物かご
 			ArrayList<ItemDataBeans> cartIDBList = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 			//合計金額
-			int totalPrice = EcHelper.getTotalItemPrice(cartIDBList);
+			//配送料がtotalPriceに足されていなかったので、DeliveryMethodDataBeansのPriceを呼んで足す
+			int totalPrice = EcHelper.getTotalItemPrice(cartIDBList)+userSelectDMB.getPrice();
+
+
 
 			BuyDataBeans bdb = new BuyDataBeans();
+
 			bdb.setUserId((int) session.getAttribute("userId"));
 			bdb.setTotalPrice(totalPrice);
+
+
+
 			bdb.setDelivertMethodId(userSelectDMB.getId());
+			//jspに渡すのnameとpriceを取得
+			bdb.setDeliveryMethodName(userSelectDMB.getName());
+			bdb.setDeliveryMethodPrice(userSelectDMB.getPrice());
+
 
 
 

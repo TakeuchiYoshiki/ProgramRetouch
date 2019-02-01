@@ -63,7 +63,7 @@ public class EcHelper {
 	public static int getTotalItemPrice(ArrayList<ItemDataBeans> items) {
 		int total = 0;
 		for (ItemDataBeans item : items) {
-			total += item.getPrice();
+			total += item.getPrice() ;
 		}
 		return total;
 	}

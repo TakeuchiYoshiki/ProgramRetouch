@@ -48,6 +48,7 @@ public class ItemSearchResult extends HttpServlet {
 			request.setAttribute("pageMax", pageMax);
 			// 表示ページ
 			request.setAttribute("pageNum", pageNum);
+
 			request.setAttribute("itemList", searchResultItemList);
 
 			request.getRequestDispatcher(EcHelper.SEARCH_RESULT_PAGE).forward(request, response);

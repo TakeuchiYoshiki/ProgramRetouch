@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import base.DBManager;
 import beans.BuyDataBeans;
@@ -101,5 +103,59 @@ public class BuyDAO {
 			}
 		}
 	}
+
+
+	//t_buyテーブルから引数で受け取ったuserIdと一致するデータを探してLISTに詰める
+	public static List<BuyDataBeans> getBuyDataBeansByBuyUserId(int userId) throws SQLException {
+		Connection con = null;
+		List<BuyDataBeans> BuyDataList = new ArrayList<BuyDataBeans>();
+
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM t_buy"
+							+ " JOIN m_delivery_method"
+							+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+							+ " WHERE t_buy.user_id = ? ORDER BY t_buy.id DESC");
+			st.setInt(1, userId);
+
+			ResultSet rs = st.executeQuery();
+
+
+			while(rs.next()) {
+				BuyDataBeans bdb = new BuyDataBeans();
+				bdb.setId(rs.getInt("id"));
+				bdb.setTotalPrice(rs.getInt("total_price"));
+				bdb.setBuyDate(rs.getTimestamp("create_date"));
+				bdb.setDelivertMethodId(rs.getInt("delivery_method_id"));
+				bdb.setUserId(rs.getInt("user_id"));
+				bdb.setDeliveryMethodPrice(rs.getInt("price"));
+				bdb.setDeliveryMethodName(rs.getString("name"));
+
+				BuyDataList.add(bdb);
+
+			}
+
+			System.out.println("searching BuyDataBeans by buyID has been completed");
+
+
+			//UserDataにBuyDataListを返す
+			return BuyDataList;
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
+
+
 
 }

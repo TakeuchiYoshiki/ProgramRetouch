@@ -44,7 +44,12 @@ public class BuyResult extends HttpServlet {
 				bddb.setBuyId(buyId);
 				bddb.setItemId(cartInItem.getId());
 				BuyDetailDAO.insertBuyDetail(bddb);
+
+
+
 			}
+
+
 
 
 			/* ====購入完了ページ表示用==== */

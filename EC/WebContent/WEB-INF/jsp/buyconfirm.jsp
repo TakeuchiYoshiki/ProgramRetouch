@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -31,13 +32,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="cartInItem" items="${cart}" >
+									<c:forEach var="cartInItem" items="${cart}">
 										<tr>
 											<td class="center">${cartInItem.name}</td>
 											<td class="center">${cartInItem.price}円</td>
 											<td class="center">${cartInItem.price}円</td>
 										</tr>
 									</c:forEach>
+
+
 									<tr>
 
 										<td class="center">${bdb.deliveryMethodName}</td>
@@ -55,7 +58,8 @@
 						<div class="row">
 							<div class="col s12">
 								<form action="BuyResult" method="post">
-									<button class="btn  waves-effect waves-light  col s4 offset-s4" type="submit">購入</button>
+									<button class="btn  waves-effect waves-light  col s4 offset-s4"
+										type="submit">購入</button>
 								</form>
 							</div>
 						</div>

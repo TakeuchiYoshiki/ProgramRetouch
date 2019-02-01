@@ -42,6 +42,11 @@ public class RegistConfirm extends HttpServlet {
 			udb.setLoginId(inputLoginId);
 			udb.setPassword(inputPassword);
 
+
+
+
+
+
 			String validationMessage = "";
 
 			// 入力されているパスワードが確認用と等しいか
@@ -53,7 +58,7 @@ public class RegistConfirm extends HttpServlet {
 			if (!EcHelper.isLoginIdValidation(udb.getLoginId())) {
 				validationMessage += "半角英数とハイフン、アンダースコアのみ入力できます";
 			}
-			// loginIdの重複をチェック
+			// loginIdの重複をチェック(getIdでidを取得)
 			if (UserDAO.isOverlapLoginId(udb.getLoginId(), 0)) {
 				validationMessage += "ほかのユーザーが使用中のログインIDです";
 			}
